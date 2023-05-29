@@ -1,0 +1,387 @@
+h1,
+h2 {
+    text-transform: uppercase;
+}
+h3 {
+  font-size: 23px;
+  letter-spacing: 1px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+}
+
+/* aside */
+aside {
+    background-color: #2a3f54;
+    padding-left: 15px;
+    padding-right: 30px;
+}
+aside * {
+    color: white;
+}
+aside h2 {
+    letter-spacing: 5px;
+}
+
+/* main */
+.main-container {
+  min-height: 100vh;
+  /* height: auto; */
+}
+.references {
+    display: flex;
+    background-color: #F7DDC3;
+}
+.references article {
+    width: 50%;
+    text-align: center;
+}
+.references img {
+    width: 100px;
+    background-color: rgba(241, 199, 213, 0.3);
+}
+main section>h2 {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+.main-container {
+    display: flex;
+    width: 100%;
+    background-color: #f7f7f7;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* menu */
+
+ul {
+  list-style-type: none !important;
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+a:-webkit-any-link {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar .nav-item {
+  margin-bottom: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  display: flex;
+  font-size: 14px;
+}
+
+.navbar-nav .nav-item .icon {
+  margin-right: 5px; 
+}
+
+#menu-title {
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+/*---------------- general ---------*/
+
+#profile-pic {
+    text-align: center;
+    margin-right: 10px; 
+    margin-left: 0px;
+}
+
+#profile-pic img {
+  width:55px;
+  height:55px;
+  border-radius:150px;
+}
+
+.fa-cog:before, .fa-gear:before {
+  content: "\f013";
+  font-size: 28px;
+}
+
+.usuario {
+  font-size: 13px;
+  text-align:left; 
+  margin-top: 23px;
+  margin-left: 10px;
+  align-self: flex-start;
+}
+
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+/* subir archivos */
+.containerGral {
+  border-radius: 10px;
+}
+
+.card{
+  padding: 25px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: initial;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+}
+
+.text-header {
+  font-size: 1.75em;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #303030;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.drop-zone {
+  width: 34em;
+  height: 150px;
+  /* border: 2px dashed gray; */
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  border-radius: 5px;
+  display: block;
+  padding-right: 10em;
+  padding-left: 10em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  white-space: nowrap;
+}
+
+.drop-zone .text-center {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#arrastrar{
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 3em;
+}
+
+/* boton subir archivo */
+.upload-controls {
+  margin-top: 10px;
+  color: #3483fa;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-left: 35px;
+  margin-right: 35px;;
+  border: #3483fa 1px solid;
+}
+
+.upload-controls:hover {
+  background-color: #3483fa;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* boton analizar */
+.btn-upload {
+  margin-top: 10px;
+  color: #ffffff;
+  background-color: #3483fa;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-left: 35px;
+  margin-right: 35px;;
+  border: #3483fa 1px solid;
+}
+
+.btn-upload:hover {
+  background-color: #3483fa;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-upload:focus {
+  outline: none;
+}
+
+
+
+.title {
+  flex-grow: 1;
+}
+
+.logo {
+  margin-right: 10px; 
+}
+
+
+figcaption {
+  flex-grow: 1;
+  text-align: right;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+/* Estilo del aside contraído */
+aside.collapsed {
+  width: 55px;
+  transition: width 0.3s;
+  margin-right: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+aside.collapsed .aside {
+  display: none !important;
+}
+
+main {
+  transition: margin-left 0.3s;
+  flex-grow: 1;
+}
+
+main.collapsed {
+  margin-left: 50px;
+}
+
+aside.collapsed .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+aside.collapsed .navbar-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+aside.collapsed .navbar-nav .nav-item a .icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7px;
+  overflow: hidden;
+}
+
+aside.collapsed .container .logo {
+  margin: 20px 0;
+}
+
+
+/* header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ececed;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.main-menu {
+  align-items: center;
+  display: flex;
+  padding-right: 20px;
+}
+
+.main-menu .bandera{
+  align-items: center;
+  display: flex;
+  padding-right: 20px;
+}
+
+.main-menu .logout{
+  align-items: center;
+  display: flex;
+  padding-right: 20px;
+}
+
+.main-menu p{
+  font-size: 15px;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.menu-toggle .icon {
+  font-size: 20px;
+}
+
+#flag {
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+}
+
+#logout {
+  padding-right: 10px;
+}
+
+
+#nombreMenu {
+  font-size: 22px;
+  padding-top: 40px;
+  text-align: center;
+  font-family: 'Source Code Pro', monospace;
+}
+
+
+
+/* table */
+
+.default {
+  border-collapse: collapse;
+  width: 100%;
+  border-bottom: 1px solid #f1f1f1
+}
+
+.default td,
+.default th {
+  /* border: 1px solid #000; */
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 15px;
+  padding: 8px;
+}
