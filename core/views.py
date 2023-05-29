@@ -13,7 +13,7 @@ def home(request):
 def upload_file(request):
     if request.method == 'POST' and request.FILES['file']:
         file = request.FILES['file']
-        
+
         comprobante = Comprobante(archivo=file)
         comprobante.save()
 
@@ -51,17 +51,21 @@ def procesar_comprobante(request, comprobante_id):
         return render(request, 'core/error.html')
     
 
-    # if banco:
-    #     context = {
-    #         'nombre': titular,
-    #         'banco': banco_del_comprobante,
-    #         'cuit_remitente': cuit_remitente,
-    #         'fecha': fecha,
-    #         'importe': importe
-    #     }
-    #     return JsonResponse(context)
-    # else:
-    #     return render(request, 'core/error.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

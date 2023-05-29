@@ -3,11 +3,11 @@ import re
 import os
 from pdf2image import convert_from_path
 from PIL import Image
-from . import bbva, macro, nacion, santander, santander2, mercadopago, naranjax, brubank, lemon, icbc, galicia, ciudad
+from . import bbva, macro, nacion, santander, mercadopago, naranjax, brubank, lemon, icbc, galicia, ciudad
 
 
 def get_banco_del_comprobante(pdf_path):
-    bancosTotales = [bbva, macro, nacion, santander, santander2, mercadopago, naranjax, brubank, lemon, icbc, galicia, ciudad]
+    bancosTotales = [bbva, macro, nacion, santander, mercadopago, naranjax, brubank, lemon, icbc, galicia, ciudad]
 
     for bancoIndividual in bancosTotales:
         lectura = bancoIndividual.get_text_from_pdf(pdf_path)
