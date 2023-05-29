@@ -15,15 +15,20 @@ def upload_file(request):
         file = request.FILES['file']
 
         comprobante = Comprobante(archivo=file)
+        comprobante.operacion = uuid.uuid4().int & (1<<32)-1
         comprobante.save()
 
-        return redirect('procesar_comprobante', comprobante_id=comprobante.id)
+        # return redirect('procesar_comprobante', comprobante_id=comprobante.id)
+        if comprobante.operacion is not None:
+            return redirect('procesar_comprobante', operacion=comprobante.operacion)
+        else:
+            # Manejar el caso cuando el campo operacion es None
+            return HttpResponse('Error: operacion es None')
 
     return HttpResponse('No se subió ningún archivo')
 
-
-def procesar_comprobante(request, comprobante_id):
-    comprobante = Comprobante.objects.get(id=comprobante_id)
+def procesar_comprobante(request, operacion):
+    comprobante = Comprobante.objects.get(operacion=operacion)
     pdf_path = comprobante.archivo.path
 
     # banco_del_comprobante = bbva.get_banco_from_text(bbva.get_text_from_pdf(pdf_path))
@@ -49,6 +54,35 @@ def procesar_comprobante(request, comprobante_id):
         return JsonResponse(context)
     else:
         return render(request, 'core/error.html')
+    
+
+# def procesar_comprobante(request, comprobante_id):
+#     comprobante = Comprobante.objects.get(id=comprobante_id)
+#     pdf_path = comprobante.archivo.path
+
+#     # banco_del_comprobante = bbva.get_banco_from_text(bbva.get_text_from_pdf(pdf_path))
+#     banco_del_comprobante = get_banco_del_comprobante(pdf_path)
+    
+#     if banco_del_comprobante:
+#         # Se encontró un banco válido, ejecutar las funciones restantes del archivo
+#         titular = banco_del_comprobante['titular']
+#         banco = banco_del_comprobante['banco']
+#         cuit_remitente = banco_del_comprobante['cuit_remitente']
+#         fecha = banco_del_comprobante['fecha']
+#         importe = banco_del_comprobante['importe']
+
+#         # Construir el diccionario de contexto con los datos obtenidos
+#         context = {
+#             'titular': titular,
+#             'banco': banco,
+#             'cuit_remitente': cuit_remitente,
+#             'fecha': fecha,
+#             'importe': importe
+#         }
+        
+#         return JsonResponse(context)
+#     else:
+#         return render(request, 'core/error.html')
     
 
 

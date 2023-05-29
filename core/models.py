@@ -5,6 +5,7 @@ from django.db import models
 class Comprobante(models.Model):
     archivo = models.FileField(upload_to='core/comprobantes_subidos')
     fecha_subida = models.DateTimeField(auto_now_add=True)
+    operacion = models.IntegerField(unique=True, null=True, blank=True)
 
     class Meta:
         ordering = ['-fecha_subida']
