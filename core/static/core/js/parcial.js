@@ -43,25 +43,6 @@ dropZone.addEventListener('drop', (e) => {
 });
 
 
-// document.getElementById('file-upload').addEventListener('change', handleFileSelect, false);
-
-// function handleFileSelect(event) {
-//     const files = event.target.files;
-//     const fileName = files[0].name;
-//     const fileSize = files[0].size;
-
-//     const tableBody = document.getElementById('table-body');
-//     const newRow = document.createElement('tr');
-
-//     newRow.innerHTML = `
-//         <td>${fileName}</td>
-//         <td>${fileSize}</td>
-//     `;
-
-//     tableBody.appendChild(newRow);
-
-//     document.getElementById('file-name').textContent = fileName;
-// }
 
 document.getElementById('file-upload').addEventListener('change', handleFileSelect, false);
 

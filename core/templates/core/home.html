@@ -110,34 +110,13 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <form action="{% url 'upload_file' %}" enctype="multipart/form-data" method="POST">
-                            {% csrf_token %}
-                            <div class="containerForm">
-                                <div class="drop-zone">
-                                    <div class="text-center">
-                                        <div id="arrastrar">Arrastrar y soltar</div>
-                                        <div id="file-name" hidden></div>
-                                    </div>
-                                    <table class="default">
-                                        <tbody id="table-body">
-                                            <tr id="table-row" hidden>
-                                                <td>Nombre</td>
-                                                <td>Tamaño</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>                                    
-                                </div>
-                                <div class="container">
-                                    <div class="upload-controls">
-                                        <label for="file-upload" class="custom-file-upload">
-                                            <i class="fas fa-cloud-upload-alt"></i> Suba el archivo
-                                        </label>
-                                        <input id="file-upload" name="file" type="file" style="display: none;" />
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-upload">ANALIZAR</button>
-                                </div>
-                            </div>
-                        </form>
+                      <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p>
+                          {{ form.file }}
+                        </p>
+                        <p><input type="submit" value="Upload" /></p>
+                      </form>
                     </div>
                 </div>
             </div>

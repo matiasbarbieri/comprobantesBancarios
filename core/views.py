@@ -4,35 +4,45 @@ from django.http import JsonResponse
 import os
 import uuid
 from .models import Comprobante
+from .forms import UploadFileForm
 from .banks.bancos import get_banco_del_comprobante
 # Create your views here.
 
 def home(request):
     return render(request, 'core/home.html')
 
+
 def upload_file(request):
-    if request.method == 'POST' and request.FILES['file']:
-        file = request.FILES['file']
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        file_list = []
+        operacion_multiple_uid = uuid.uuid4().int & (1<<32)-1  # UUID único para la operación múltiple
 
-        comprobante = Comprobante(archivo=file)
-        comprobante.operacion = uuid.uuid4().int & (1<<32)-1
-        comprobante.save()
-
-        # return redirect('procesar_comprobante', comprobante_id=comprobante.id)
-        if comprobante.operacion is not None:
+        for f in request.FILES.getlist('file'):
+            operacion_uuid = uuid.uuid4().int & (1<<32)-1
+            comprobante = Comprobante(archivo=f)
+            file_list.append(comprobante)
+            comprobante.operacion = operacion_uuid
+            comprobante.operacion_multiple_uid = operacion_multiple_uid
+            comprobante.save()
+        
+        if len(file_list) == 1:
             return redirect('procesar_comprobante', operacion=comprobante.operacion)
+        if len(file_list) > 1:
+            return redirect('procesar_comprobante_multiple', operacion_multiple_uid=operacion_multiple_uid)
         else:
-            # Manejar el caso cuando el campo operacion es None
             return HttpResponse('Error: operacion es None')
 
-    return HttpResponse('No se subió ningún archivo')
+        return HttpResponse("Los archivos se subieron correctamente")
+    else: # GET
+        form = UploadFileForm()
+    return render(request, 'core/home.html', {'form': form})    # el form es el formulario que se muestra en la pagina 
 
 def procesar_comprobante(request, operacion):
-    comprobante = Comprobante.objects.get(operacion=operacion)
-    pdf_path = comprobante.archivo.path
+    comprobante = Comprobante.objects.get(operacion=operacion) # Obtener el comprobante que se subió
+    pdf_path = comprobante.archivo.path # Obtener el path del archivo subido para luego pasarlo a la funcion get_banco_del_comprobante
 
-    # banco_del_comprobante = bbva.get_banco_from_text(bbva.get_text_from_pdf(pdf_path))
-    banco_del_comprobante = get_banco_del_comprobante(pdf_path)
+    banco_del_comprobante = get_banco_del_comprobante(pdf_path) # Aca se llama a la funcion que se encuentra en el archivo bancos.py
     
     if banco_del_comprobante:
         # Se encontró un banco válido, ejecutar las funciones restantes del archivo
@@ -55,6 +65,66 @@ def procesar_comprobante(request, operacion):
     else:
         return render(request, 'core/error.html')
     
+
+def procesar_comprobante_multiple(request, operacion_multiple_uid):
+    comprobantes = Comprobante.objects.filter(operacion_multiple_uid=operacion_multiple_uid)  # Obtener todos los comprobantes con el mismo UID de operación múltiple
+    print(comprobantes)
+    if comprobantes:
+        context = {'comprobantes': []}
+
+        for comprobante in comprobantes:
+            pdf_path = comprobante.archivo.path
+            banco_del_comprobante = get_banco_del_comprobante(pdf_path)
+
+            if banco_del_comprobante:
+                # Se encontró un banco válido, ejecutar las funciones restantes del archivo
+                titular = banco_del_comprobante['titular']
+                banco = banco_del_comprobante['banco']
+                cuit_remitente = banco_del_comprobante['cuit_remitente']
+                fecha = banco_del_comprobante['fecha']
+                importe = banco_del_comprobante['importe']
+
+                # Construir el diccionario de contexto con los datos obtenidos
+                context['comprobantes'].append({
+                    'titular': titular,
+                    'banco': banco,
+                    'cuit_remitente': cuit_remitente,
+                    'fecha': fecha,
+                    'importe': importe
+                })
+        return JsonResponse(context)
+    else:
+        return render(request, 'core/error.html')
+            
+
+
+
+
+
+
+
+# def upload_file(request):
+#     if request.method == 'POST' and request.FILES['file']:
+#         file = request.FILES['file']
+
+#         comprobante = Comprobante(archivo=file)
+#         comprobante.operacion = uuid.uuid4().int & (1<<32)-1
+#         comprobante.save()
+
+#         # return redirect('procesar_comprobante', comprobante_id=comprobante.id)
+#         if comprobante.operacion is not None:
+#             return redirect('procesar_comprobante', operacion=comprobante.operacion)
+#         else:
+#             # Manejar el caso cuando el campo operacion es None
+#             return HttpResponse('Error: operacion es None')
+
+#     return HttpResponse('No se subió ningún archivo')
+
+
+
+
+
+
 
 # def procesar_comprobante(request, comprobante_id):
 #     comprobante = Comprobante.objects.get(id=comprobante_id)
